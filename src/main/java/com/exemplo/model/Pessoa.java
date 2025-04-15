@@ -1,9 +1,9 @@
 package com.exemplo.model; // Aqui, você usa o pacote adequado
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity // Esta anotação indica que a classe é uma entidade JPA
 public class Pessoa {

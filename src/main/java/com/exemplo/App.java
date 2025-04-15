@@ -3,9 +3,9 @@ package com.exemplo;
 import com.exemplo.model.Pessoa;
 import com.exemplo.repository.PessoaRepository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import java.util.List;
 
 public class App {

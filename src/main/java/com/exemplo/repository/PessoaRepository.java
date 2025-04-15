@@ -2,8 +2,8 @@ package com.exemplo.repository;
 
 import com.exemplo.model.Pessoa;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import java.util.List;
 
 public class PessoaRepository {
