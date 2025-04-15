@@ -1,33 +1,30 @@
 package com.exemplo;
 
-import com.exemplo.model.Pessoa;
-import com.exemplo.repository.PessoaRepository;
+import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+import org.glassfish.jersey.server.ResourceConfig;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import java.util.List;
+import java.io.IOException;
+import java.net.URI;
 
 public class App {
-    public static void main(String[] args) {
-        // Cria o EntityManager a partir da unidade de persistência
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("apiPU");
-        EntityManager em = emf.createEntityManager();
+    // URI base do serviço REST
+    public static final String BASE_URI = "http://localhost:8080/api/";
 
-        // Instancia o repositório com o EntityManager
-        PessoaRepository pessoaRepository = new PessoaRepository(em);
+    public static HttpServer startServer() {
+        // Cria um ResourceConfig que escaneia o pacote com seus recursos REST
+        final ResourceConfig rc = new ResourceConfig().packages("com.exemplo.resource");
 
-        // Lista todas as pessoas
-        List<Pessoa> pessoas = pessoaRepository.findAll();
+        // Cria e retorna o servidor Grizzly HTTP usando a configuração
+        return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
+    }
 
-        System.out.println("Pessoas cadastradas no banco:");
-        for (Pessoa pessoa : pessoas) {
-            System.out.println(
-                    "ID: " + pessoa.getId() + " | Nome: " + pessoa.getNome() + " | Idade: " + pessoa.getIdade());
-        }
-
-        // Fecha os recursos
-        em.close();
-        emf.close();
+    public static void main(String[] args) throws IOException {
+        // Inicia o servidor
+        final HttpServer server = startServer();
+        System.out.println(String.format("Servidor Jersey iniciado em %s", BASE_URI));
+        System.out.println("Pressione Enter para encerrar...");
+        System.in.read();
+        server.shutdownNow();
     }
 }

@@ -2,3 +2,4 @@ com/exemplo/model/Pessoa.class
 com/exemplo/repository/PessoaRepository.class
 com/exemplo/service/PessoaService.class
 com/exemplo/App.class
+com/exemplo/resource/PessoaResource.class
