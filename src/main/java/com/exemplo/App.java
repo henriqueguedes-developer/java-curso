@@ -1,3 +1,4 @@
+// src/main/java/com/exemplo/App.java
 package com.exemplo;
 
 import org.glassfish.grizzly.http.server.HttpServer;
@@ -5,6 +6,7 @@ import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import com.exemplo.config.SwaggerConfig;
+import com.exemplo.config.OpenApiResource;
 import com.exemplo.resource.SwaggerResource;
 
 import java.io.IOException;
@@ -19,7 +21,8 @@ public class App {
         final ResourceConfig rc = new ResourceConfig()
                 .packages("com.exemplo.resource")
                 .register(SwaggerResource.class)
-                .register(SwaggerConfig.class);
+                .register(SwaggerConfig.class)
+                .register(OpenApiResource.class);
 
         // Cria e retorna o servidor Grizzly HTTP usando a configuração
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
